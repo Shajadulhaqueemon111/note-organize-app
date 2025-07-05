@@ -9,6 +9,9 @@ import Home from "../Home/Home";
 
 import NotFound from "../Dashboard/NotFound";
 import DashboardLayout from "../Dashboard/DashboardLayout";
+import CreateNote from "../AllNote/CreateNote";
+import LoginPage from "../Login/LoginPage";
+import RegisterPage from "../Register/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/singup",
+        element: <RegisterPage />,
       },
     ],
   },
@@ -38,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "favorite-note",
         element: <Favorites />,
+      },
+      {
+        path: "create-note",
+        element: <CreateNote />,
       },
       { path: "*", element: <NotFound /> },
     ],

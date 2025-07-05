@@ -16,7 +16,7 @@ const Home = () => {
         </div>
 
         <div>
-          <Link to="/signin">
+          <Link to="/login">
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
               Sign In
             </button>
@@ -24,7 +24,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Header Section */}
       <header className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-purple-700 mb-4">
           Your Digital Note-Taking Companion
