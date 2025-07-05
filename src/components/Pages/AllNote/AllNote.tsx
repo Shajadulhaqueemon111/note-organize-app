@@ -4,7 +4,9 @@ import { FaSearch, FaFilter } from "react-icons/fa";
 const AllNote = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">All Notes</h1>
+      <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+        All Notes
+      </h1>
 
       <div className="flex flex-wrap gap-4 items-center justify-between">
         <div className="relative flex-1 min-w-[220px]">

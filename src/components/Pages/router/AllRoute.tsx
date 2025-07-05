@@ -12,6 +12,8 @@ import DashboardLayout from "../Dashboard/DashboardLayout";
 import CreateNote from "../AllNote/CreateNote";
 import LoginPage from "../Login/LoginPage";
 import RegisterPage from "../Register/RegisterPage";
+import ManageCategories from "../Dashboard/ManageCategory";
+import Archived from "../Dashboard/Archived";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "all-note",
+        path: "all-notes",
         element: <AllNote />,
       },
       {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "create-note",
         element: <CreateNote />,
+      },
+      {
+        path: "manage-catagories",
+        element: <ManageCategories />,
+      },
+      {
+        path: "archived",
+        element: <Archived />,
       },
       { path: "*", element: <NotFound /> },
     ],

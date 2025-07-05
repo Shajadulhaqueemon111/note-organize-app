@@ -38,7 +38,7 @@ const Sidebar = () => {
           {/* Menu */}
           <nav className="p-4 space-y-4 text-sm text-gray-700">
             <div className="space-y-2">
-              <Link to="/dashboard/all-note">
+              <Link to="/dashboard/all-notes">
                 <button className="flex items-center gap-2 w-full text-left px-2 py-1 hover:bg-indigo-100 rounded-md">
                   <FaStickyNote /> All Notes
                   <span className="ml-auto bg-gray-200 px-2 py-0.5 rounded text-xs">
@@ -54,12 +54,14 @@ const Sidebar = () => {
                   </span>
                 </button>
               </Link>
-              <button className="flex items-center gap-2 w-full text-left px-2 py-1 hover:bg-indigo-100 rounded-md">
-                <FaArchive /> Archived
-                <span className="ml-auto bg-gray-200 px-2 py-0.5 rounded text-xs">
-                  0
-                </span>
-              </button>
+              <Link to="/dashboard/archived">
+                <button className="flex items-center gap-2 w-full text-left px-2 py-1 hover:bg-indigo-100 rounded-md">
+                  <FaArchive /> Archived
+                  <span className="ml-auto bg-gray-200 px-2 py-0.5 rounded text-xs">
+                    0
+                  </span>
+                </button>
+              </Link>
             </div>
 
             <hr />
