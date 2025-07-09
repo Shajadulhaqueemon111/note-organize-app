@@ -2,13 +2,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { FaSearch, FaFilter } from "react-icons/fa";
+import { FaSearch, FaFilter, FaTrash, FaEye, FaEdit } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ScaleLoader } from "react-spinners";
 import debounce from "lodash.debounce";
-
+import Swal from "sweetalert2";
+import { useAuth } from "../AuthProvider/AuthContext";
 const AllNote = () => {
+  const { user } = useAuth();
+  const userId = user?._id;
   const [notes, setNotes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
@@ -53,6 +56,40 @@ const AllNote = () => {
     debouncedFetch(searchTerm, category);
   }, [searchTerm, category]);
 
+  const handleDelete = async (_id: any) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (result.isConfirmed) {
+      try {
+        const token = await localStorage.getItem("accessToken");
+        if (!token) {
+          toast.error("localstorage does not token");
+        }
+        const res = await axios.delete(
+          `http://localhost:5000/api/v1/notes/${_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (res.status == 200) {
+          toast.success("note deleted successfully");
+
+          setNotes((prev: any) => prev.filter((item: any) => item._id !== _id));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
@@ -80,6 +117,7 @@ const AllNote = () => {
             <option value="">All Categories</option>
             <option value="personal">Personal</option>
             <option value="work">Work</option>
+            <option value="work">Creativity</option>
             <option value="ideas">Ideas</option>
             <option value="todo">To-Do</option>
             <option value="important">Important</option>
@@ -96,26 +134,68 @@ const AllNote = () => {
         </div>
       </div>
 
-      {/* Loader and Notes */}
       {loading ? (
         <div className="flex justify-center items-center h-40">
           <ScaleLoader color="#2cabab" height={35} />
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {notes.length > 0 ? (
-            notes.map((note: any) => (
-              <div
-                key={note._id}
-                className="p-4 bg-white rounded-xl shadow hover:shadow-lg transition"
-              >
-                <h3 className="text-xl font-semibold mb-2">{note.title}</h3>
-                <p className="text-gray-600">{note.content}</p>
-                <span className="text-sm text-indigo-500 mt-2 inline-block">
-                  {note.category}
-                </span>
-              </div>
-            ))
+          {notes.filter((note: any) => note.userId === userId).length > 0 ? (
+            notes
+              .filter((note: any) => note.userId === userId)
+              .map((note: any) => (
+                <div
+                  key={note._id}
+                  className="p-5 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-300 relative"
+                >
+                  <img
+                    className="h-20 w-25 mb-2"
+                    src={`http://localhost:5000/uploads/${note.image}`}
+                    alt="Note"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {note.title}
+                  </h3>
+                  <p className="text-gray-600 mb-3 line-clamp-3">
+                    {note.content}
+                  </p>
+
+                  <div className="flex justify-between items-center text-sm text-gray-500">
+                    <span className="bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full">
+                      {note.category}
+                    </span>
+                    <span>
+                      Date:{" "}
+                      {new Date(note.createdAt).toISOString().slice(0, 10)}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-4 right-4 flex gap-3">
+                    <button
+                      title="View"
+                      className="text-blue-500 hover:text-blue-700 transition"
+                      onClick={() => console.log("View", note._id)}
+                    >
+                      <FaEye />
+                    </button>
+                    <Link to={`/dashboard/edit-note/${note._id}`}>
+                      <button
+                        title="Edit"
+                        className="text-green-500 hover:text-green-700 transition"
+                      >
+                        <FaEdit />
+                      </button>
+                    </Link>
+                    <button
+                      title="Delete"
+                      className="text-red-500 hover:text-red-700 transition"
+                      onClick={() => handleDelete(note._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                </div>
+              ))
           ) : (
             <p className="text-gray-500 col-span-2">No notes found.</p>
           )}

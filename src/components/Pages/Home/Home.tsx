@@ -20,14 +20,12 @@ const Home = () => {
         <div>
           {user?.email ? (
             <div className="flex items-center gap-4">
-              {/* Avatar Image */}
               <img
-                src={user?.profileImage || "/default-avatar.png"}
+                src={`http://localhost:5000/uploads/${user.profileImage}`}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full border"
               />
 
-              {/* Logout Button */}
               <button
                 onClick={logout}
                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
@@ -56,9 +54,7 @@ const Home = () => {
         </p>
       </header>
 
-      {/* Features Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
-        {/* Card 1 */}
         <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
           <div className="flex justify-center mb-4">
             <div className="bg-blue-100 p-3 rounded-full">

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { LuImageUp } from "react-icons/lu";
+import toast from "react-hot-toast";
+import { useAuth } from "../AuthProvider/AuthContext";
 const CreateNote = () => {
+  const { user } = useAuth();
+  const userId = user?._id;
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
@@ -14,14 +19,18 @@ const CreateNote = () => {
     formData.append("title", title);
     formData.append("category", category);
     formData.append("content", content);
-    if (image) {
-      formData.append("image", image);
+    formData.append("userId", userId || "");
+    if (!image) {
+      toast.error("Please upload an image.");
+      return;
     }
+    formData.append("image", image);
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/notes",
+        "http://localhost:5000/api/v1/notes/create-note",
         formData,
+
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -29,16 +38,16 @@ const CreateNote = () => {
         }
       );
 
-      console.log("Note created:", res.data);
-      // Clear form
+      console.log("Note created:", res.data?.data);
+
       setTitle("");
       setCategory("");
       setContent("");
       setImage(null);
-      alert("Note created successfully!");
+      toast.success("Note created successfully!");
     } catch (err) {
       console.error("Error creating note:", err);
-      alert("Failed to create note.");
+      toast.error("Failed to create note.");
     }
   };
 
@@ -70,10 +79,12 @@ const CreateNote = () => {
             required
             className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
-            <option value="">Select category</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Creative">Creative</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="work">Creativity</option>
+            <option value="ideas">Ideas</option>
+            <option value="todo">To-Do</option>
+            <option value="important">Important</option>
           </select>
         </div>
 

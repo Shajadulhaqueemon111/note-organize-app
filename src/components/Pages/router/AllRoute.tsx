@@ -12,9 +12,10 @@ import DashboardLayout from "../Dashboard/DashboardLayout";
 import CreateNote from "../AllNote/CreateNote";
 import LoginPage from "../Login/LoginPage";
 import RegisterPage from "../Register/RegisterPage";
-import ManageCategories from "../Dashboard/ManageCategory";
+
 import Archived from "../Dashboard/Archived";
 import ProtectedRoute from "../AuthProvider/ProtectedRoute";
+import EditNote from "../AllNote/EditNote";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/singup",
+        path: "/signup",
         element: <RegisterPage />,
       },
     ],
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
         element: <AllNote />,
       },
       {
+        path: "edit-note/:_id",
+        element: <EditNote />,
+      },
+      {
         path: "favorite-note",
         element: <Favorites />,
       },
@@ -61,10 +66,7 @@ const router = createBrowserRouter([
         path: "create-note",
         element: <CreateNote />,
       },
-      {
-        path: "manage-catagories",
-        element: <ManageCategories />,
-      },
+
       {
         path: "archived",
         element: <Archived />,

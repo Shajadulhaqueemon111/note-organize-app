@@ -1,6 +1,49 @@
-import { Link } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from "axios";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigae = useNavigate();
+  const handleRegister = async (e: {
+    preventDefault: () => void;
+    target: any;
+  }) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const profileImage = form.profileImage.files[0];
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const registerUser = {
+      name,
+      profileImage,
+      email,
+      password,
+    };
+
+    console.log(registerUser);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/user/create-user",
+        registerUser,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+      toast.success(res.data?.data?.message);
+      navigae("/login");
+    } catch (err) {
+      console.log(err);
+      toast.error("registration is failed");
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200 p-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
@@ -8,7 +51,7 @@ const RegisterPage = () => {
           Welcome to NoteFlow
         </h2>
 
-        <form className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-5">
           <div>
             <label
               htmlFor="name"
@@ -39,8 +82,23 @@ const RegisterPage = () => {
               required
             />
           </div>
+          <div>
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-700"
+            >
+              profileImage
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              name="profileImage"
+              placeholder="Enter your email"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+          </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"

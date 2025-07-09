@@ -12,6 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 interface DecodedToken {
+  image: string;
   _id: string;
   name: string;
   role: string;

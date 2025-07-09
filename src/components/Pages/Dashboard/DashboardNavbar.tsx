@@ -20,7 +20,7 @@ const DashboardNavbar = () => {
             <div className="flex items-center gap-4">
               {/* Avatar Image */}
               <img
-                src={user?.profileImage || "/default-avatar.png"}
+                src={`http://localhost:5000/uploads/${user.profileImage}`}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full border"
               />
