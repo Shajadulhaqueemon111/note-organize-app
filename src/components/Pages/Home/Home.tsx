@@ -1,7 +1,9 @@
 import { FaPlus, FaSearch, FaImage } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthProvider/AuthContext";
 
 const Home = () => {
+  const { user, logout } = useAuth();
   return (
     <div className="min-h-screen bg-[#f5f9ff] px-4 md:px-8 py-6">
       {/* Top Branding and Sign In */}
@@ -16,11 +18,30 @@ const Home = () => {
         </div>
 
         <div>
-          <Link to="/login">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-              Sign In
-            </button>
-          </Link>
+          {user?.email ? (
+            <div className="flex items-center gap-4">
+              {/* Avatar Image */}
+              <img
+                src={user?.profileImage || "/default-avatar.png"}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full border"
+              />
+
+              {/* Logout Button */}
+              <button
+                onClick={logout}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Sign In
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 

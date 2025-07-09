@@ -14,6 +14,7 @@ import LoginPage from "../Login/LoginPage";
 import RegisterPage from "../Register/RegisterPage";
 import ManageCategories from "../Dashboard/ManageCategory";
 import Archived from "../Dashboard/Archived";
+import ProtectedRoute from "../AuthProvider/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {

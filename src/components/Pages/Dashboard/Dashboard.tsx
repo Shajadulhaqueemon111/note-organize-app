@@ -4,21 +4,21 @@ const Dashboard = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">
-        Welcome to Your Note Dashboard 📒
+        Welcome to Your Note Dashboard
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-lg font-semibold">Total Notes</h2>
-          <p className="text-2xl font-bold text-blue-500">120</p>
+        <div className="bg-linear-65 from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
+          <h2 className="text-lg font-semibold text-white">Total Notes</h2>
+          <p className="text-2xl font-bold text-white">120</p>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-lg font-semibold">Categories</h2>
-          <p className="text-2xl font-bold text-green-500">5</p>
+        <div className="bg-linear-65 from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
+          <h2 className="text-lg font-semibold text-white">Categories</h2>
+          <p className="text-2xl font-bold text-white">5</p>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-lg font-semibold">Archived Notes</h2>
-          <p className="text-2xl font-bold text-red-500">8</p>
+        <div className="bg-linear-65 from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
+          <h2 className="text-lg font-semibold text-white">Archived Notes</h2>
+          <p className="text-2xl font-bold text-white">8</p>
         </div>
       </div>
 
