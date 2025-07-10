@@ -21,7 +21,7 @@ const Home = () => {
           {user?.email ? (
             <div className="flex items-center gap-4">
               <img
-                src={`http://localhost:5000/uploads/${user.profileImage}`}
+                src={`https://note-organize-app-backend.vercel.app/uploads/${user.profileImage}`}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full border"
               />

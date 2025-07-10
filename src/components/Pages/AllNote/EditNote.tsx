@@ -23,7 +23,7 @@ const EditNote = () => {
         if (!token) return;
 
         const res = await axios.get(
-          `http://localhost:5000/api/v1/notes/${_id}`,
+          `https://note-organize-app-backend.vercel.app/api/v1/notes/${_id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -65,7 +65,7 @@ const EditNote = () => {
       if (!token) return toast.error("Token missing!");
 
       const res = await axios.patch(
-        `http://localhost:5000/api/v1/notes/${_id}`,
+        `https://note-organize-app-backend.vercel.app/api/v1/notes/${_id}`,
         formData,
         {
           headers: {
@@ -137,7 +137,7 @@ const EditNote = () => {
             ) : (
               existingImage && (
                 <img
-                  src={`http://localhost:5000/uploads/${existingImage}`}
+                  src={existingImage}
                   alt="Previous"
                   className="mt-2 w-28 h-20 object-cover mx-auto rounded-md"
                 />

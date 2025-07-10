@@ -12,7 +12,7 @@ export interface INote {
   isArchived: boolean;
   isDeleted: boolean;
   userId: string;
-  createdAt?: string; // if using timestamps
+  createdAt?: string;
   updatedAt?: string;
 }
 
@@ -31,11 +31,14 @@ const Dashboard = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:5000/api/v1/notes", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        "https://note-organize-app-backend.vercel.app/api/v1/notes",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setNotes(res.data?.data || []);
     } catch (err) {
       console.log(err);
@@ -51,7 +54,7 @@ const Dashboard = () => {
   const totalNotes = userNotes.length;
   const uniqueCategories = [...new Set(userNotes.map((note) => note.category))];
   const totalCategories = uniqueCategories.length;
-  const totalArchived = userNotes.filter((note) => note.isArchived).length;
+  // const totalArchived = userNotes.filter((note) => note.isArchived).length;
 
   return (
     <div className="p-6">
@@ -59,7 +62,7 @@ const Dashboard = () => {
         Welcome to Your Note Dashboard
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
         <div className="bg-gradient-to-r from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
           <h2 className="text-lg font-semibold text-white">Total Notes</h2>
           <p className="text-2xl font-bold text-white">{totalNotes}</p>
@@ -68,10 +71,10 @@ const Dashboard = () => {
           <h2 className="text-lg font-semibold text-white">Categories</h2>
           <p className="text-2xl font-bold text-white">{totalCategories}</p>
         </div>
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
+        {/* <div className="bg-gradient-to-r from-purple-500 to-pink-500 shadow-md rounded-lg p-6 text-center">
           <h2 className="text-lg font-semibold text-white">Archived Notes</h2>
           <p className="text-2xl font-bold text-white">{totalArchived}</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-wrap gap-4 justify-center mb-10">

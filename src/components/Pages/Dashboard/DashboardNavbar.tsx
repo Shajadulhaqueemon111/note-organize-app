@@ -18,14 +18,12 @@ const DashboardNavbar = () => {
         <div>
           {user?.email ? (
             <div className="flex items-center gap-4">
-              {/* Avatar Image */}
               <img
-                src={`http://localhost:5000/uploads/${user.profileImage}`}
+                src={user.profileImage}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full border"
               />
 
-              {/* Logout Button */}
               <button
                 onClick={logout}
                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"

@@ -26,15 +26,18 @@ const AllNote = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:5000/api/v1/notes", {
-        params: {
-          search,
-          category: categoryValue,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        "https://note-organize-app-backend.vercel.app/api/v1/notes",
+        {
+          params: {
+            search,
+            category: categoryValue,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setNotes(res.data?.data || []);
     } catch (err) {
@@ -73,7 +76,7 @@ const AllNote = () => {
           toast.error("localstorage does not token");
         }
         const res = await axios.delete(
-          `http://localhost:5000/api/v1/notes/${_id}`,
+          `https://note-organize-app-backend.vercel.app/api/v1/notes/${_id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -148,11 +151,7 @@ const AllNote = () => {
                   key={note._id}
                   className="p-5 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-300 relative"
                 >
-                  <img
-                    className="h-20 w-25 mb-2"
-                    src={`http://localhost:5000/uploads/${note.image}`}
-                    alt="Note"
-                  />
+                  <img className="h-20 w-25 mb-2" src={note.image} alt="Note" />
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">
                     {note.title}
                   </h3>
@@ -171,13 +170,16 @@ const AllNote = () => {
                   </div>
 
                   <div className="absolute top-4 right-4 flex gap-3">
-                    <button
-                      title="View"
-                      className="text-blue-500 hover:text-blue-700 transition"
-                      onClick={() => console.log("View", note._id)}
-                    >
-                      <FaEye />
-                    </button>
+                    <Link to={`/dashboard/edit-note/${note._id}`}>
+                      <button
+                        title="View"
+                        className="text-blue-500 hover:text-blue-700 transition"
+                        onClick={() => console.log("View", note._id)}
+                      >
+                        <FaEye />
+                      </button>
+                    </Link>
+
                     <Link to={`/dashboard/edit-note/${note._id}`}>
                       <button
                         title="Edit"
