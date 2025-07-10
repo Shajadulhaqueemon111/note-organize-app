@@ -1,69 +1,40 @@
-# React + TypeScript + Vite
+# Note Organize App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and secure note/task management web application built with React and TypeScript. Users can register, login, and manage their personal tasks. Only the logged-in user can access and manage their own notes.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [Click here to visit the app](https://my-note-organize-app.vercel.app)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Name => Description |
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+| **React** => Frontend library  
+| **TypeScript** => Type-safe JavaScript  
+| **Tailwind CSS** => Utility-first CSS framework  
+| **React Router** => Client-side routing  
+| **Axios** => HTTP client for API requests  
+| **React Icons** => Icon library for React  
+| **React Hot Toast**=> Notification system
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **User Registration & Login**  
+  Users can create an account and log in securely.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Authentication with Token**  
+  JWT-based authentication system using localStorage.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **User-Specific Access**
+- Every user can only see and manage their own notes/tasks.
+- One user's notes are **not accessible** to others.
+
+- **Note Management**
+- Create, view, and manage personal notes.
+- Notes are categorized and displayed in a dashboard view.
+
+- **Responsive Design**  
+  Fully mobile-friendly and optimized for all screen sizes.
