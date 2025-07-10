@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Handle existing token or refresh if missing/expired
   useEffect(() => {
     const existingToken = localStorage.getItem("accessToken");
 
@@ -48,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const isExpired = decoded.exp && Date.now() >= decoded.exp * 1000;
 
         if (isExpired) {
-          await refreshToken(); // Refresh expired token
+          await refreshToken();
         } else {
           setUser(decoded);
           setAccessToken(existingToken);

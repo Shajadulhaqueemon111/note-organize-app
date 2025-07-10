@@ -5,10 +5,10 @@ import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col overflow-auto">
+      <div className="flex-1 flex flex-col overflow-y-auto bg-[#f5f9ff]">
         <DashboardNavbar />
 
         <main className="p-4">

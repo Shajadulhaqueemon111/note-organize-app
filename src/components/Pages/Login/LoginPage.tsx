@@ -3,16 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthProvider/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { jwtDecode } from "jwt-decode";
 
-interface DecodedToken {
-  _id: string;
-  name: string;
-  profileImage: string;
-  role: string;
-  iat: number;
-  exp: number;
-}
+// interface DecodedToken {
+//   _id: string;
+//   name: string;
+//   profileImage: string;
+//   role: string;
+//   iat: number;
+//   exp: number;
+// }
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -44,14 +43,11 @@ const LoginPage = () => {
           withCredentials: true,
         }
       );
-      console.log(response);
+
       const token = response.data?.data?.accessToken;
-      console.log(token);
+
       if (token) {
         login(token);
-
-        const decoded = jwtDecode<DecodedToken>(token);
-        console.log("Decoded Token:", decoded);
 
         toast.success("Login successful!");
         navigate("/dashboard");

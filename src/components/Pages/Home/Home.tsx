@@ -6,7 +6,6 @@ const Home = () => {
   const { user, logout } = useAuth();
   return (
     <div className="min-h-screen bg-[#f5f9ff] px-4 md:px-8 py-6">
-      {/* Top Branding and Sign In */}
       <div className="flex items-center justify-between mb-8 sticky top-0 bg-[#f5f9ff] z-10 py-2">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
@@ -21,7 +20,7 @@ const Home = () => {
           {user?.email ? (
             <div className="flex items-center gap-4">
               <img
-                src={`https://note-organize-app-backend.vercel.app/uploads/${user.profileImage}`}
+                src={user.profileImage}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full border"
               />
@@ -70,7 +69,6 @@ const Home = () => {
           </p>
         </div>
 
-        {/* Card 2 */}
         <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
           <div className="flex justify-center mb-4">
             <div className="bg-purple-100 p-3 rounded-full">
@@ -100,7 +98,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Call to Action Button */}
       <div className="text-center">
         <Link to="/dashboard">
           <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-lg font-semibold shadow hover:scale-105 transition">

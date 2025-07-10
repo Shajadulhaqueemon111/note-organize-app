@@ -10,7 +10,6 @@ const ProtectedRoute = ({ children }: { children: any }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  console.log("Checking protected route. User:", user);
   if (loading) {
     return (
       <div>
