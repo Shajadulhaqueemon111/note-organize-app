@@ -20,6 +20,13 @@ Name => Description |
 | **React Icons** => Icon library for React  
 | **React Hot Toast**=> Notification system
 
+🚀 Tech Stack:
+Frontend: Next.js, React,TypeScript, Tailwind CSS
+Backend/API: TypeScript, Node.js, Express 
+Database: MongoDB + Mongoose
+Authentication: JWT-based, role-protected (User & Admin)
+Deployment: Vercel
+
 ## Features
 
 - **User Registration & Login**  
