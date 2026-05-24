@@ -8,6 +8,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const isPasswordStrong = (password: string) => {
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+={}[\]|\\:;"'<>,.?/~`]).{8,}$/;
@@ -30,12 +31,14 @@ const RegisterPage = () => {
       toast.error("Please upload a profile image");
       return;
     }
+
     if (!isPasswordStrong(password)) {
       toast.error(
-        "Password must be at least 8 characters, include uppercase, lowercase, number, and special character."
+        "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.",
       );
       return;
     }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("profileImage", profileImage);
@@ -44,6 +47,7 @@ const RegisterPage = () => {
 
     try {
       setLoading(true);
+
       const res = await axios.post(
         "https://note-organize-app-backend.vercel.app/api/v1/user/create-user",
         formData,
@@ -51,8 +55,9 @@ const RegisterPage = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
+
       toast.success(res.data?.message || "Registration successful!");
       navigate("/login");
     } catch (err: any) {
@@ -64,6 +69,16 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200 p-4">
+      {/* Full Screen Loader */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-14 h-14 border-4 border-white border-t-indigo-600 rounded-full animate-spin"></div>
+            <p className="text-white text-lg font-semibold">Registering...</p>
+          </div>
+        </div>
+      )}
+
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
           Welcome to NoteFlow
@@ -77,6 +92,7 @@ const RegisterPage = () => {
             >
               Full Name
             </label>
+
             <input
               type="text"
               id="name"
@@ -95,6 +111,7 @@ const RegisterPage = () => {
             >
               Email Address
             </label>
+
             <input
               type="email"
               id="email"
@@ -113,6 +130,7 @@ const RegisterPage = () => {
             >
               Profile Image
             </label>
+
             <input
               type="file"
               accept="image/*"
@@ -131,6 +149,7 @@ const RegisterPage = () => {
             >
               Password
             </label>
+
             <input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -140,6 +159,7 @@ const RegisterPage = () => {
               required
               disabled={loading}
             />
+
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
